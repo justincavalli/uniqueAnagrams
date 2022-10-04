@@ -1,0 +1,4 @@
+this is a random    text file with some stuff
+written in it.there should be about 30
+amount of unique anagrams in this file. So
+this is a test to see if the program works correctly

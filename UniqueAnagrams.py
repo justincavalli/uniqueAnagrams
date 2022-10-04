@@ -1,26 +1,37 @@
 import ListHash
 import re
 
-testfile = open('file.txt', 'r')
-HashTable = ListHash.ListHash()
+def test(filename):
 
-while True:
-    line = testfile.readline()
+    testfile = open(filename, 'r')
+    # testfile = open('file.txt', 'r')
+    HashTable = ListHash.ListHash()
 
-    # stop looping if the end of the file is reached
-    if not line:
-        break
-    
-    # split on every non alphanumeric character
-    words = re.split('[^a-zA-Z0-9]', line)
-    print(words)
-    # put every word into the hastable
-    for word in words:
+    while True:
+        #line = testfile.readline()
+        line = testfile.readline()
+
+        # stop looping if the end of the file is reached
+        if not line:
+            break
         
-        # sort the word by its characters
-        sort = ''.join(sorted(word))
-        # value does not matter in this instance
-        item = sort, 0
-        HashTable.insert(item)
-    
-print('There are ', HashTable.size(), ' unique anagrams in file.txt')
+        # split on every non alphanumeric character
+        words = re.split('[^a-zA-Z0-9]', line)
+        # put every word into the hastable
+        for word in words:
+            
+            # sort the word by its characters
+            sort = ''.join(sorted(word))
+            
+            # takes care of the empty string case caused by \n
+            if (len(sort) > 0):
+                # value does not matter in this instance
+                item = sort, 0
+                HashTable.insert(item)
+        
+    print('There are ', HashTable.size(), ' unique anagrams in ', filename)
+    print('The size of the HashTable is ', len(HashTable._HashTable), '\n')
+
+test("pride-and-prejudice.txt")
+test("file.txt")
+test("randomtext.txt")
